@@ -11,11 +11,19 @@ the Maine Maritime Museum installation, and is not licensed for other use.'''
 from pydub import AudioSegment
 from pydub.playback import play
 import random
+import pyowm
 
 def random_number_generator():
     '''This will get the random seed information and produce a pan value to be
     used with pydub.'''
-    return random.randrange(-100, 100) / 100
+    owm = pyowm.OWM(API_key='48ac48853b61a5d4e7b59a5a6aaac2d4')
+    observe_weather = owm.weather_at_place('Bath,us')
+    weather = observe_weather.get_weather()
+    wind = weather.get_wind()
+    windspeed = wind['speed']
+    random.seed(a=windspeed)
+    random_number = random.randrange(-100, 100) / 100
+    return random_number
 
 
 def get_tracks_as_segments(track1, track2):
