@@ -15,7 +15,7 @@ import random
 def random_number_generator():
     '''This will get the random seed information and produce a pan value to be
     used with pydub.'''
-    return random.randrange(0, 100) / 100
+    return random.randrange(-100, 100) / 100
 
 
 def get_tracks_as_segments(track1, track2):
@@ -29,7 +29,7 @@ def set_pans_and_overlay(sounds):
     '''sets the pan for each track based on the results of 
     random_number_generator'''
     panned_right = sounds[0].pan(random_number_generator())
-    panned_left = sounds[1].pan(-random_number_generator())
+    panned_left = sounds[1].pan(random_number_generator())
     overlay = panned_right.overlay(panned_left)
     return overlay
 
