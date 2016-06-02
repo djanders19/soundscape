@@ -70,5 +70,6 @@ def main():
 	sound = set_pans_and_overlay(sounds)
 	play(sound)
 
-main()
+while True:
+	main()
 
