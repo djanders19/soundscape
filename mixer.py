@@ -20,15 +20,17 @@ import pyowm
 def random_number_generator():
 	'''This will get the random seed information and produce a pan value to be
 	used with pydub.'''
-	# Access weather data using the pyowm package and OpenWeatherMaps API
-	owm = pyowm.OWM(API_key='48ac48853b61a5d4e7b59a5a6aaac2d4')
-	observe_weather = owm.weather_at_place('Bath,us')
-	weather = observe_weather.get_weather()
-	wind = weather.get_wind()
-	windspeed = wind['speed']
-	print(windspeed)
-
-	# Generate two random numbers using the windspeed as a seed:
+	try: # Access weather data using the pyowm package and OpenWeatherMaps API
+		owm = pyowm.OWM(API_key='48ac48853b61a5d4e7b59a5a6aaac2d4')
+		observe_weather = owm.weather_at_place('Bath,us')
+		weather = observe_weather.get_weather()
+		wind = weather.get_wind()
+		windspeed = wind['speed']
+		print(windspeed)
+	except:
+		windspeed = random.random()
+		
+	# Generate four random numbers using the windspeed as a seed:
 	# random.seed(a=windspeed) <-- Uncomment this once weather is worked out
 	rand_num1 = random.randrange(-100, 100) / 100
 	rand_num2 = random.randrange(-100, 100) / 100
@@ -73,12 +75,10 @@ def set_pans_and_overlay(sounds):
 
 def main():
 	'''stitches everything together'''
-	# These are both just test files on my computer right now, but will be
-	# replaced with the correct files when I get my handos on them:
-	track1 = 'group1.mp3'
-	track2 = 'group2.mp3'
-	track3 = 'group3.mp3'
-	track4 = 'group4.mp3'
+	track1 = '4mp3s/group1.mp3'
+	track2 = '4mp3s/group2.mp3'
+	track3 = '4mp3s/group3.mp3'
+	track4 = '4mp3s/group4.mp3'
 
 	sounds = get_tracks_as_segments(track1, track2, track3, track4)
 
